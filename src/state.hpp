@@ -3,7 +3,7 @@
 #include <cstdint>
 #include "map/map.hpp"
 
-class GameState
+struct GameState
 {
     public:
         GameState() { running = true; }
@@ -13,5 +13,5 @@ class GameState
         uint32_t playerX;
         uint32_t playerY;
 
-        Map map;
+        Map* map;
 };

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "terminal.hpp"
-#include "map/wakeup.hpp"
 #include <cstdio>
 #include <cstdint>
 #include "state.hpp"

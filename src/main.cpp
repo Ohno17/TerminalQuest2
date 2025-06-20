@@ -6,39 +6,53 @@ EventManager eventManager {handleKeyDown, handleResizeWindow};
 
 int main(void)
 {
+    initMaps();
+
     state.playerX = 10;
     state.playerY = 10;
-    state.map.text = WAKEUP;
+    state.map = (Map*)WAKEUP;
 
     display.printGame(state);
     while (state.running) eventManager.readEvents();
 }
 
+void afterPlayerMove(void)
+{
+    // Check for exits
+    for (std::shared_ptr<Exit> exitPtr : state.map->exits)
+    {
+        if ((*exitPtr).isInside(state.playerX, state.playerY))
+        {
+            state.playerX = (*exitPtr).exitX;
+            state.playerY = (*exitPtr).exitY;
+            state.map = *(*exitPtr).map;
+        }
+    }
+    display.printMap(state);
+}
+
 void handleKeyDown(char key)
 {
-    if (key == 0x1B)
-    {
-        state.running = false;
-        return;
-    }
-
     switch (key)
     {
+        case 0x1b:
+            state.running = false;
+            return;
         case 'w':
             state.playerY--;
-            display.printMap(state);
+            afterPlayerMove();
             break;
         case 's':
             state.playerY++;
-            display.printMap(state);
+            afterPlayerMove();
             break;
         case 'a':
             state.playerX--;
-            display.printMap(state);
+            afterPlayerMove();
             break;
         case 'd':
             state.playerX++;
-            display.printMap(state);
+            afterPlayerMove();
             break;
         default:
             break;

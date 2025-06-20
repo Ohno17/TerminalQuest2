@@ -14,7 +14,7 @@ void DisplayManager::printGame(GameState& state)
 
     setTextFormat(YELLOW);
     setCursorPosition(textBoxInnerX, getNumRows() - 2);
-    printf("Rows: %d, Cols: %d, Press ESC to terminate", getNumRows(), getNumColumns());
+    printf("Rows: %d, Cols: %d, ESC to terminate", getNumRows(), getNumColumns());
 
     setTextFormat(YELLOW);
     printText(textBoxInnerX, textBoxInnerY, "Detective:");
@@ -63,9 +63,9 @@ void DisplayManager::printMap(GameState& state)
 
     uint32_t currentX = 0;
     uint32_t currentY = 0;
-    for (uint32_t i = 0; state.map.text[i] != '\0'; i++)
+    for (uint32_t i = 0; state.map->text[i] != '\0'; i++)
     {
-        if (state.map.text[i] == '\n')
+        if (state.map->text[i] == '\n')
         {
             currentX = 0;
             currentY++;
@@ -80,7 +80,7 @@ void DisplayManager::printMap(GameState& state)
             printf("@");
             setTextFormat(GREEN);
         }
-        else printf("%c", state.map.text[i]);
+        else printf("%c", state.map->text[i]);
     }
 }
 
