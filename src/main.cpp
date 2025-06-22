@@ -10,7 +10,7 @@ int main(void)
 
     state.playerX = 10;
     state.playerY = 10;
-    state.map = (Map*)WAKEUP;
+    state.map = WAKEUP;
 
     display.printGame(state);
     while (state.running) eventManager.readEvents();
