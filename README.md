@@ -1,4 +1,4 @@
-# Terminal Quest 2 (Detective)
-This game follows a detective investigating a murder.
+# Terminal Quest 2 (Quadratic Information Finder)
+This program allows the user to find useful information about a quadratic.
 
-ESC to terminate program at any time, and the WASD keys are used. Compiles with ```make``` for windows and linux.
+Compiles with ```make``` for windows and linux/unix platforms.
