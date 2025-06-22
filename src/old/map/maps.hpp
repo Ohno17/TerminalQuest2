@@ -4,6 +4,8 @@
 
 Map* WAKEUP;
 Map* WAKEUP_CORRIDOR;
+Map* TOWN_BOTTOM; // TODO
+Map* TOWN_TOP; // TODO
 
 void initMaps(void)
 {
