@@ -1,59 +1,67 @@
-#include <cstdio>
-#include <math.h>
+#include "main.hpp"
 
-#define LABEL(text) "\x1b[32m" text "\x1b[0m"
+GameState state;
+DisplayManager display {"Detective"};
+EventManager eventManager {handleKeyDown, handleResizeWindow};
 
 int main(void)
 {
-    int a;
-    int b;
-    int c;
+    initMaps();
 
-    printf(LABEL("Equation") ": y = ax^2 + bx + c\n");
+    state.playerX = 10;
+    state.playerY = 10;
+    state.map = (Map*)WAKEUP;
 
-    printf("Enter a: ");
-    scanf("%d", &a);
-    printf("Enter b: ");
-    scanf("%d", &b);
-    printf("Enter c: ");
-    scanf("%d", &c);
+    display.printGame(state);
+    while (state.running) eventManager.readEvents();
+}
 
-    printf(LABEL("=== QUADRATIC EQUATION INFORMATION ===") "\n\n");
-
-    printf(LABEL("Equation") ": y = %dx^2 + %dx + %d\n", a, b, c);
-
-    double discriminant = (b*b) - (4*a*c);
-    printf(LABEL("Discriminant") ": %f ", discriminant);
-
-    if (discriminant > 0) printf("(Solutions: 2)\n");
-    else if (discriminant == 0) printf("(Solutions: 1)\n");
-    else if (discriminant < 0) printf("(Solutions: 0)\n");
-
-    printf("\n" LABEL("== Solutions ==") "\n");
-    if (discriminant > 0)
+void afterPlayerMove(void)
+{
+    // Check for exits
+    for (std::shared_ptr<Exit> exitPtr : state.map->exits)
     {
-        double numeratorSqrt = sqrt(discriminant);
-        double denomenator = 2*a;
+        if ((*exitPtr).isInside(state.playerX, state.playerY))
+        {
+            state.playerX = (*exitPtr).exitX;
+            state.playerY = (*exitPtr).exitY;
+            state.map = *(*exitPtr).map;
+        }
+    }
+    display.printMap(state);
+}
 
-        printf(LABEL("x1") ": %f\n", (-b + numeratorSqrt) / denomenator);
-        printf(LABEL("x2") ": %f\n", (-b - numeratorSqrt) / denomenator);
-    } else if (discriminant == 0)
+void handleKeyDown(char key)
+{
+    switch (key)
     {
-        double numeratorSqrt = sqrt(discriminant);
-        double denomenator = 2*a;
+        case 0x1b:
+            state.running = false;
+            return;
+        case 'w':
+            state.playerY--;
+            afterPlayerMove();
+            break;
+        case 's':
+            state.playerY++;
+            afterPlayerMove();
+            break;
+        case 'a':
+            state.playerX--;
+            afterPlayerMove();
+            break;
+        case 'd':
+            state.playerX++;
+            afterPlayerMove();
+            break;
+        default:
+            break;
+    }
+}
 
-        printf(LABEL("x1") ": %f\n", (-b + numeratorSqrt) / denomenator);
-    } else if (discriminant < 0) printf("Solutions are imaginary\n");
-
-    printf("\n" LABEL("== Graph Information ==") "\n");
-
-    double x = (-b) / (2*a);
-    double y = a*x*x + b*x + c;
-    printf(LABEL("Line of Symmetry") ": x = %f\n", x);
-    printf(LABEL("Vertex") ": (%f, %f)\n", x, y);
-
-    bool opensUp = a > 0;
-    printf(LABEL("Direction") ": Opens %s", opensUp ? "Up" : "Down");
-
-    return 0;
+void handleResizeWindow(uint32_t columns, uint32_t rows)
+{
+    display.clearScreen();
+    display.setNewSize(columns, rows);
+    display.printGame(state);
 }
