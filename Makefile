@@ -7,10 +7,10 @@ OUTPUT_DIR := build
 SOURCES := $(wildcard $(SOURCE_DIR)/*.cpp)
 HEADERS := $(wildcard $(SOURCE_DIR)/*.h)
 
-.PHONY: windows
-windows: clean compile_windows run
+.PHONY: all
+all: clean compile run
 
-compile_windows: $(SOURCES) $(HEADERS)
+compile: $(SOURCES) $(HEADERS)
 	$(CC) /Fo$(OUTPUT_DIR)\ $(SOURCES) /link /out:$(OUTPUT_DIR)\main.exe
 
 .PHONY: run
