@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <cmath>
 #include <cstdint>
+#include <cinttypes>
 #include <memory>
 
 #if defined(_WIN32) || defined(_WIN64)
