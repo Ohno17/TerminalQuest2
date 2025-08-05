@@ -11,7 +11,7 @@ HEADERS := $(wildcard $(SOURCE_DIR)/*.h)
 all: clean compile run
 
 compile: $(SOURCES) $(HEADERS)
-	$(CC) /Fo$(OUTPUT_DIR)\ $(SOURCES) /link /out:$(OUTPUT_DIR)\main.exe
+	$(CC) /Fo"$(OUTPUT_DIR)"\ $(SOURCES) /std:c++17 /link /out:$(OUTPUT_DIR)\main.exe
 
 .PHONY: run
 run:

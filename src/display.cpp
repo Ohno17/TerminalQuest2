@@ -84,7 +84,7 @@ void DisplayManager::printMap(GameState& state)
     }
 }
 
-// Prints double border box
+// Prints border box
 void DisplayManager::printBox(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 {
     setCursorPosition(x1, y1);

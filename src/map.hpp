@@ -4,10 +4,10 @@
 #include <vector>
 #include <memory>
 
-class Map;
-class Exit;
+struct Map;
+struct Exit;
 
-class Map
+struct Map
 { 
     public:
         Map(const char* text, std::vector<std::shared_ptr<Exit>> &exits) : text(text), exits(exits) {}
@@ -32,7 +32,7 @@ struct Exit
         const uint32_t maxCornerX;
         const uint32_t maxCornerY;
 
-        bool isInside(uint32_t x, uint32_t y) const
+        inline bool isInside(uint32_t x, uint32_t y) const
         {
             return x >= minCornerX && y >= minCornerY && x <= maxCornerX && y <= maxCornerY;
         }

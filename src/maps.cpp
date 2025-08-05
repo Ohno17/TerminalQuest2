@@ -1,15 +1,6 @@
-#pragma once
+#include "maps.hpp"
 
-#include "map.hpp"
-
-Map* WAKEUP;
-Map* WAKEUP_CORRIDOR;
-Map* TOWN_BOTTOM; // TODO
-Map* TOWN_TOP; // TODO
-
-void initMaps(void)
-{
-    WAKEUP = new Map("\
+Map* WAKEUP = new Map("\
 ##*=- .. ,.,. -+*#@%\n\
 @##*+  .. ,, -+=#$#@\n\
 #+=  . , ..    -:$##\n\
@@ -30,11 +21,11 @@ void initMaps(void)
 @#& %#&*# #* $*#&@#^\n\
 %&#$ %#@$&%&#@ $%&&#\n\
 @#$%#&$%&#@&$%&#&$%&",
-    std::vector<std::shared_ptr<Exit>> {
-        std::make_shared<Exit>(&WAKEUP_CORRIDOR, 10, 18, 0, 0, 20, 0)
-    });
+std::vector<std::shared_ptr<Exit>> {
+    std::make_shared<Exit>(&WAKEUP_CORRIDOR, 10, 18, 0, 0, 20, 0)
+});
 
-    WAKEUP_CORRIDOR = new Map("\
+Map* WAKEUP_CORRIDOR = new Map("\
 ##*=- .. ,.,. -+*#@%\n\
 @##*+  .. ,, -+=#$#@\n\
 #+=  . , ..    -:$##\n\
@@ -55,7 +46,6 @@ void initMaps(void)
 @#+-   .  ,   +==#@@\n\
 @##*+  .. ,, -+=#$#@\n\
 #+=  . , ..    -:$##",
-    std::vector<std::shared_ptr<Exit>> {
-        std::make_shared<Exit>(&WAKEUP, 10, 1, 0, 19, 20, 20)
-    });
-}
+std::vector<std::shared_ptr<Exit>> {
+    std::make_shared<Exit>(&WAKEUP, 10, 1, 0, 19, 20, 20)
+});

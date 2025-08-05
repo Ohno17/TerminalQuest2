@@ -6,8 +6,6 @@ EventManager eventManager {handleKeyDown, handleResizeWindow};
 
 int main(void)
 {
-    initMaps();
-
     state.playerX = 10;
     state.playerY = 10;
     state.map = WAKEUP;

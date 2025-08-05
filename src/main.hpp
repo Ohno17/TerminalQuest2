@@ -5,7 +5,7 @@
 #include "state.hpp"
 #include "display.hpp"
 #include "event.hpp"
-#include "map/maps.hpp"
+#include "maps.hpp"
 
 int main(void);
 void handleKeyDown(char key);

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "map/map.hpp"
+#include "map.hpp"
 
 struct GameState
 {
