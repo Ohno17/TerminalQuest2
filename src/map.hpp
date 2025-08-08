@@ -7,22 +7,29 @@
 struct Map;
 struct Exit;
 
+enum MapID
+{
+    WAKEUP = 0,
+    WAKEUP_CORRIDOR,
+    _TOTAL
+};
+
 struct Map
 { 
     public:
-        Map(const char* text, std::vector<std::shared_ptr<Exit>> &exits) : text(text), exits(exits) {}
+        Map(const char text[420], std::vector<Exit>&& exits) : text(text), exits(exits) {}
 
         const char* text;
-        std::vector<std::shared_ptr<Exit>> exits;
+        std::vector<Exit> exits;
 };
 
 struct Exit
 {
     public:
-        Exit(Map** map, uint32_t exitX, uint32_t exitY, uint32_t minCornerX, uint32_t minCornerY, uint32_t maxCornerX, uint32_t maxCornerY) :
-            map(map), exitX(exitX), exitY(exitY), minCornerX(minCornerX), minCornerY(minCornerY), maxCornerX(maxCornerX), maxCornerY(maxCornerY) {}
+        Exit(const MapID mapId, uint32_t exitX, uint32_t exitY, uint32_t minCornerX, uint32_t minCornerY, uint32_t maxCornerX, uint32_t maxCornerY) :
+            mapId(mapId), exitX(exitX), exitY(exitY), minCornerX(minCornerX), minCornerY(minCornerY), maxCornerX(maxCornerX), maxCornerY(maxCornerY) {}
 
-        Map** map;
+        const MapID mapId;
 
         const uint32_t exitX;
         const uint32_t exitY;

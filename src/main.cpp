@@ -1,14 +1,14 @@
 #include "main.hpp"
 
 GameState state;
-DisplayManager display {"Detective"};
-EventManager eventManager {handleKeyDown, handleResizeWindow};
+DisplayManager display("Detective");
+EventManager eventManager(handleKeyDown, handleResizeWindow);
 
 int main(void)
 {
     state.playerX = 10;
     state.playerY = 10;
-    state.map = WAKEUP;
+    state.map = MapID::WAKEUP;
 
     display.printGame(state);
     while (state.running) eventManager.readEvents();
@@ -17,13 +17,13 @@ int main(void)
 void afterPlayerMove(void)
 {
     // Check for exits
-    for (std::shared_ptr<Exit> exitPtr : state.map->exits)
+    for (const Exit& exit : maps[state.map].exits)
     {
-        if ((*exitPtr).isInside(state.playerX, state.playerY))
+        if (exit.isInside(state.playerX, state.playerY))
         {
-            state.playerX = (*exitPtr).exitX;
-            state.playerY = (*exitPtr).exitY;
-            state.map = *(*exitPtr).map;
+            state.playerX = exit.exitX;
+            state.playerY = exit.exitY;
+            state.map = exit.mapId;
         }
     }
     display.printMap(state);

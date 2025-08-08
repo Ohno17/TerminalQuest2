@@ -1,6 +1,7 @@
 #include "maps.hpp"
 
-Map* WAKEUP = new Map("\
+const Map maps[MapID::_TOTAL] = {
+    {"\
 ##*=- .. ,.,. -+*#@%\n\
 @##*+  .. ,, -+=#$#@\n\
 #+=  . , ..    -:$##\n\
@@ -21,11 +22,10 @@ Map* WAKEUP = new Map("\
 @#& %#&*# #* $*#&@#^\n\
 %&#$ %#@$&%&#@ $%&&#\n\
 @#$%#&$%&#@&$%&#&$%&",
-std::vector<std::shared_ptr<Exit>> {
-    std::make_shared<Exit>(&WAKEUP_CORRIDOR, 10, 18, 0, 0, 20, 0)
-});
-
-Map* WAKEUP_CORRIDOR = new Map("\
+    {
+        {MapID::WAKEUP_CORRIDOR, 10, 18, 0, 0, 20, 0}
+    }},
+    {"\
 ##*=- .. ,.,. -+*#@%\n\
 @##*+  .. ,, -+=#$#@\n\
 #+=  . , ..    -:$##\n\
@@ -46,6 +46,7 @@ Map* WAKEUP_CORRIDOR = new Map("\
 @#+-   .  ,   +==#@@\n\
 @##*+  .. ,, -+=#$#@\n\
 #+=  . , ..    -:$##",
-std::vector<std::shared_ptr<Exit>> {
-    std::make_shared<Exit>(&WAKEUP, 10, 1, 0, 19, 20, 20)
-});
+    {
+        {MapID::WAKEUP, 10, 1, 0, 19, 20, 20}
+    }}
+};

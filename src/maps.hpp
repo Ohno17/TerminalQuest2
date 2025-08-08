@@ -2,7 +2,4 @@
 
 #include "map.hpp"
 
-extern Map* WAKEUP;
-extern Map* WAKEUP_CORRIDOR;
-extern Map* TOWN_BOTTOM;
-extern Map* TOWN_TOP;
+extern const Map maps[MapID::_TOTAL];

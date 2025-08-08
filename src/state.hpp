@@ -6,12 +6,12 @@
 struct GameState
 {
     public:
-        GameState() { running = true; }
+        GameState() : running(true) {}
 
         bool running;
 
         uint32_t playerX;
         uint32_t playerY;
 
-        Map* map;
+        MapID map;
 };

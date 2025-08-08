@@ -1,9 +1,10 @@
 #pragma once
 
 #include "terminal.hpp"
+#include "state.hpp"
+#include "maps.hpp"
 #include <cstdio>
 #include <cstdint>
-#include "state.hpp"
 
 class DisplayManager : public TerminalBuffer
 {
