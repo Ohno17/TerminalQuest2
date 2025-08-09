@@ -1,4 +1,4 @@
-GAME NAME: Murder Detective
+GAME NAME: Detective
 
 a detective wakes up on an open field
  needs to find the killer

@@ -19,7 +19,7 @@ void afterPlayerMove(void)
     // Check for exits
     for (const Exit& exit : maps[state.map].exits)
     {
-        if (exit.isInside(state.playerX, state.playerY))
+        if (exit.bounds.isInside(state.playerX, state.playerY))
         {
             state.playerX = exit.exitX;
             state.playerY = exit.exitY;

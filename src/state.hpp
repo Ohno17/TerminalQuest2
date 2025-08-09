@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "map.hpp"
+#include "maps.hpp"
 
 struct GameState
 {
@@ -10,8 +10,8 @@ struct GameState
 
         bool running;
 
-        uint32_t playerX;
-        uint32_t playerY;
+        int32_t playerX;
+        int32_t playerY;
 
-        MapID map;
+        MapID map = MapID::NONE;
 };

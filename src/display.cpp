@@ -40,13 +40,13 @@ void DisplayManager::printTextWithWrap(uint32_t x, uint32_t y, const char* text,
     uint32_t currentX = x;
     for (; text[current] != '\0'; current++)
     {
-        if (currentX >= wrapLimit)
-        {
-            currentX = x;
-            setCursorPosition(x, ++currentY);
-        }
         if (text[current] == ' ')
         {
+            if (currentX >= wrapLimit)
+            {
+                currentX = x;
+                setCursorPosition(x, ++currentY);
+            }
             printf("%.*s", current - start, text + start);
             start = current;
         }
@@ -65,7 +65,9 @@ void DisplayManager::printMap(GameState& state)
     uint32_t currentY = 0;
     for (uint32_t i = 0; maps[state.map].text[i] != '\0'; i++)
     {
-        if (maps[state.map].text[i] == '\n')
+        char c = maps[state.map].text[i];
+
+        if (c == '\n')
         {
             currentX = 0;
             currentY++;
@@ -77,10 +79,29 @@ void DisplayManager::printMap(GameState& state)
         if (state.playerX == currentX && currentY == state.playerY)
         {
             setTextFormat(RED);
-            printf("@");
+            printf("☺︎");
             setTextFormat(GREEN);
+            continue;
         }
-        else printf("%c", maps[state.map].text[i]);
+        
+        // Switch color based on special character
+        bool didSwitchColor = true;
+        switch (c)
+        {
+            case '.':
+            case ',':
+                setTextFormat(YELLOW);
+                break;
+            case '_':
+            case '|':
+                setTextFormat(BLUE);
+                break;
+            default:
+                didSwitchColor = false;
+                break;
+        }
+        printf("%c", maps[state.map].text[i]);
+        if (didSwitchColor) setTextFormat(GREEN);
     }
 }
 
